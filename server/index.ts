@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import initializeDatabase from "./db";
+import initializeDatabase from "./database/db";
 const app = express();
 const port = process.env.PORT || 3000;
 
