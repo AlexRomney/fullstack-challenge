@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import initializeDatabase from "./database/db";
+import seedDatabase from "./database/seed";
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -12,6 +14,8 @@ const port = process.env.PORT || 3000;
  * Good luck!
  */
 const db = initializeDatabase();
+
+seedDatabase(db);
 
 app.use(cors());
 app.use(express.json());

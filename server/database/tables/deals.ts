@@ -10,7 +10,7 @@ export default function createDeals(db: Database) {
             start_date DATETIME NOT NULL,
             end_date DATETIME NOT NULL,
             value INTEGER NOT NULL, 
-            status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'closed')),
+            status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'paused', 'cancelled')),
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (organization_id) REFERENCES organizations(id),
