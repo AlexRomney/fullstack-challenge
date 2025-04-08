@@ -1,6 +1,6 @@
 import { Database } from "better-sqlite3";
 
-export default function createOrganizations(db: Database) {
+export default function createOrganizations(db: Database): void {
     db.prepare(
         `
         CREATE TABLE IF NOT EXISTS organizations (

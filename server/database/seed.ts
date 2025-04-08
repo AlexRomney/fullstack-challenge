@@ -1,7 +1,17 @@
 import { Database } from "better-sqlite3";
 import dayjs from "dayjs";
 
-export default function seedDatabase(db: Database) {
+interface SeededOrg {
+    id: number;
+    name: string;
+}
+
+interface SeededAccount {
+    id: number;
+    name: string;
+}
+
+export default function seedDatabase(db: Database): void {
     const orgCount = db.prepare("SELECT COUNT(*) as count FROM organizations").get() as { count: number };
 
     if (orgCount.count > 0) return;
@@ -10,14 +20,15 @@ export default function seedDatabase(db: Database) {
 
     // Seed organizations
     const insertOrganization = db.prepare("INSERT INTO organizations (name) VALUES (?)");
-    const orgs = ["McDonald's", "Burger King", "Wendy's"].map((name) => {
+    const orgs: SeededOrg[] = ["McDonald's", "Burger King", "Wendy's"]
+        .map((name) => {
         const result = insertOrganization.run(name);
         return { id: result.lastInsertRowid as number, name };
     });
 
     // Seed accounts
     const insertAccount = db.prepare("INSERT INTO accounts (name) VALUES (?)");
-    const accounts = [
+    const accounts: SeededAccount[] = [
         "Pokemon",
         "SpongeBob SquarePants",
         "Super Mario",

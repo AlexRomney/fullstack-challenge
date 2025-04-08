@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import initializeDatabase from "./database/db";
 import seedDatabase from "./database/seed";
+import { Organization } from "./types";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  const rows = db.prepare("SELECT * FROM organizations").all();
+  const rows = db.prepare("SELECT * FROM organizations").all() as Organization[];
   res.json({ message: "Welcome to the server! 🎉", rows });
 });
 
