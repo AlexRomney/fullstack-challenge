@@ -2,8 +2,6 @@
 CHALLENGE 1
 ************************************
 
-- Added .env file to store important variable and enviorment specific values.
-
 - Added the accounts table keeping it simple and matching the organizations
 table columns. I decided to leave organization_id out of the accounts table and leave them both as stand alones, but they have a has-many-through relationship when deals are made.
 
