@@ -1,4 +1,10 @@
 ************************************
+OVERVIEW
+************************************
+
+- Clone repo and inside the repo's frontend and server folders run npm install and npm run dev. I stuck with sqlite and created a seeder that should run on the initial run.
+
+************************************
 CHALLENGE 1
 ************************************
 
@@ -19,7 +25,7 @@ table columns. I decided to leave organization_id out of the accounts table and 
 CHALLENGE 2
 ************************************
 
-
+- Added react-router for routing structure, axios for data handling and tailwind css for easy/fast styling.
 
 ************************************
 CHALLENGE 3

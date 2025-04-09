@@ -7,7 +7,15 @@ export default function organizationRoutes(db: Database) {
     const router = Router();
 
     router.get("/", (req, res) => {
-        const orgs = db.prepare("SELECT * FROM organizations").all() as Organization[];
+        const orgs = db.prepare(`
+            SELECT
+            organizations.*,
+            COUNT(deals.id) AS deal_count
+            FROM organizations
+            LEFT JOIN deals ON deals.organization_id = organizations.id
+            GROUP BY organizations.id
+        `).all();
+        
         res.json({ orgs });
     });
 
