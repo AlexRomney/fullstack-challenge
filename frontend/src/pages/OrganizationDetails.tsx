@@ -27,8 +27,13 @@ interface OrganizationDetail {
 export default function OrganizationDetails() {
     
     const { id } = useParams<{ id: string }>();
+
     const [org, setOrg] = useState<OrganizationDetail>();
     const [error, setError] = useState<string | null>(null);
+    const [showFilters, setShowFilters] = useState(false);
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [yearFilter, setYearFilter] = useState("all");
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -109,9 +114,63 @@ export default function OrganizationDetails() {
             </div>
 
             <div className="mt-6">
+                <button
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="inline-flex items-center gap-1 rounded-full border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                >
+                    Filters
+                    <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-5.414 5.414A1 1 0 0015 12.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-4.586a1 1 0 00-.293-.707L3.293 6.707A1 1 0 013 6V4z"
+                        />
+                    </svg>
+                </button>
+                
+                {showFilters && (
+                    <div className="mt-2 w-64 rounded-md border border-gray-200 bg-white p-4 shadow-md absolute z-10">
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Status</label>
+                            <select
+                                value={statusFilter}
+                                onChange={(e) => setStatusFilter(e.target.value)}
+                                className="mt-1 block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            >
+                                <option value="all">All</option>
+                                <option value="active">Active</option>
+                                <option value="paused">Paused</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Year</label>
+                            <select
+                                value={yearFilter}
+                                onChange={(e) => setYearFilter(e.target.value)}
+                                className="mt-1 block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            >
+                                <option value="all">All</option>
+                                {Array.from(new Set(org.deals.map((deal) =>
+                                    new Date(deal.start_date).getFullYear()
+                                ))).map((year) => (
+                                    <option key={year} value={year}>{year}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                )}
+                
                 <ul
                     role="list"
-                    className="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8"
+                    className="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8 mt-6"
                 >
                     {org.deals.map((deal) => (
                         <DealCard
