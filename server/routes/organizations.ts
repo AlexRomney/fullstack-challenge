@@ -32,13 +32,23 @@ export default function organizationRoutes(db: Database) {
 
         const deals = setupDealsData(rows); // helpers.tsx
 
+        const statuses = ["active", "paused", "cancelled"];
+
+        const totals = statuses.reduce((totals, status) => {
+            totals[status] = deals
+                .filter((deal) => deal.status === status)
+                .reduce((sum, deal) => sum + deal.value, 0);
+            return totals;
+        }, {} as Record<string, number>);
+
         const org = {
             org_id,
             org_name,
             org_created,
             deals,
+            totals
         };
-
+        console.log(org);
         res.json(org);
     });
 

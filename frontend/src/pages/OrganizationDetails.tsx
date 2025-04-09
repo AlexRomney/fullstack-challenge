@@ -17,6 +17,11 @@ interface OrganizationDetail {
     org_name: string;
     org_created: string;
     deals: Deal[];
+    totals: {
+        active: number;
+        paused: number;
+        cancelled: number;
+    };
 }
 
 export default function OrganizationDetails() {
@@ -85,7 +90,25 @@ export default function OrganizationDetails() {
                 </div>
             )}
 
-            <div className="mt-10">
+            <div className="mt-4 rounded-md bg-gray-50 p-4 ring-1 ring-gray-600/20">
+                <p> Total Values </p>
+                <div className="flex space-x-12 mt-2">
+                    {Object.entries(org.totals).map(([status, value]) => (
+                        <div key={status} className="text-sm">
+                            <p className="capitalize text-gray-500">{status}</p>
+                            <p className="font-semibold text-gray-900">
+                                {new Intl.NumberFormat("en-US", {
+                                    style: "currency",
+                                    currency: "USD",
+                                    minimumFractionDigits: value % 1 === 0 ? 0 : 2,
+                                }).format(value)}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="mt-6">
                 <ul
                     role="list"
                     className="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8"
@@ -94,7 +117,7 @@ export default function OrganizationDetails() {
                         <DealCard
                             key={deal.id}
                             account_name={deal.account_name}
-                            value={deal.value / 100}
+                            value={deal.value}
                             status={deal.status}
                             start_date={deal.start_date}
                             end_date={deal.end_date}

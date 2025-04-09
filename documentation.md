@@ -29,6 +29,8 @@ CHALLENGE 2
 
 - Decided to add pages with table data to view all organizations, accounts and deals similar to what you'd see in an admin panel.
 
+- I didn't fully understand all the different values in the screenshot so I went with displaying the numbers as I have them. Decided to go with a simple card display for every deal that an organization has.
+
 ************************************
 CHALLENGE 3
 ************************************

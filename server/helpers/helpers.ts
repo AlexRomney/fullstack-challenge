@@ -32,7 +32,7 @@ export function getDealRelationshipsQuery(
         org.name AS org_name,
         org.created_at AS org_created,
         deals.id AS deal_id,
-        deals.value,
+        deals.value / 100 AS value,
         deals.status,
         deals.start_date,
         deals.end_date,
