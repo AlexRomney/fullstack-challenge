@@ -4,6 +4,8 @@ OVERVIEW
 
 - Clone repo and inside the repo's frontend and server folders run npm install and npm run dev. I stuck with sqlite and created a seeder that should run on the initial run.
 
+- I separated each challenge into its own branch so you could see the work per task if you wanted. If not then you can merge each branch together and view it all.
+
 ************************************
 CHALLENGE 1
 ************************************
@@ -38,5 +40,17 @@ CHALLENGE 3
 - Added a simple filter that shows all the status options and years that are pertaining to the list of deals for the organization. The year filter looks at both start_date and end_date.
 
 ************************************
-CONCLUSION
+CONCLUSION / THOUGHTS
 ************************************
+
+- Overall I really enjoyed the challenge! Not knowing React or Node at all beforehand it was a great quickstart to the frameworks and SponsorCX as well. Good job creating this assessment!
+
+- I tried my best to figure out best practices and organization, but I'm sure things that I did aren't the norm. I hope the intent was still shown and I know I can learn that actual ways of this stack with time and more interaction.
+
+- Related to the last point, I'm sure there are much better ways to componentize or setups helper functions or manipulate data, but I did my best with the time I had and tutorials I could review.
+
+- I already did a little more than the challenge asked for with adding table pages for all three tables, but if I had more time to complete the project I would definitely add details pages for accounts and deals similar to organizations except specific to each. I would add functionality to the deals so they could update the status. I would add .env files to store more private data like the endpoint URL's. I figured it would be easier to not send those over so you can just clone and run the app. I assume there is a Faker type package for Node so I would use that to seed more data. I would add images to the organizations and accounts so they could display rather than the SponsorCX logo everywhere.
+
+- Only thing that tripped me up that I can think of was the screenshot on challenge two. A lot of numbers and terms that weren't shared and I wasn't sure how to mimic that so hopefully what I did works haha
+
+- Thank you for letting me do this challenge! I had a good time!
