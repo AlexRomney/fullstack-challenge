@@ -2,7 +2,9 @@ import express from "express";
 import cors from "cors";
 import initializeDatabase from "./database/db";
 import seedDatabase from "./database/seed";
-import { Organization } from "./types";
+import organizationRoutes from "./routes/organizations";
+import accountRoutes from "./routes/accounts";
+import dealRoutes from "./routes/deals";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,10 +24,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  const rows = db.prepare("SELECT * FROM organizations").all() as Organization[];
-  res.json({ message: "Welcome to the server! 🎉", rows });
-});
+app.use("/organizations", organizationRoutes(db));
+app.use("/accounts", accountRoutes(db));
+app.use("/deals", dealRoutes(db));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

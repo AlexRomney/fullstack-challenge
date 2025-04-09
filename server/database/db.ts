@@ -1,9 +1,9 @@
-import Database from "better-sqlite3";
+import Database, { Database as DatabaseType } from "better-sqlite3";
 import createOrganizations from "./tables/organizations";
 import createAccounts from "./tables/accounts";
 import createDeals from "./tables/deals";
 
-function initializeDatabase() {
+function initializeDatabase(): DatabaseType {
   const db = new Database("./database.sqlite", { verbose: console.log });
   db.pragma('foreign_keys = ON');
   

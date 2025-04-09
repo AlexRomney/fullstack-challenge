@@ -23,3 +23,16 @@ export interface Deal {
     created_at: string;
     updated_at: string;
 }
+
+export interface DealRelationshipQuery {
+    org_id: number;
+    org_name: string;
+    org_created: string;
+    org_updated: string;
+    deal_id: number;
+    value: number;
+    status: string;
+    start_date: string;
+    end_date: string;
+    account_name: string;
+}
