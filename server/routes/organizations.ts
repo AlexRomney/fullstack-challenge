@@ -21,15 +21,16 @@ export default function organizationRoutes(db: Database) {
     router.get("/:id", (req, res) => {
         const id = Number(req.params.id);
 
-        const rows = getDealRelationshipsQuery(db, { orgId: id });
+        const rows = getDealRelationshipsQuery(db, { orgId: id }); // helpers.tsx
 
         if (!rows.length) {
             res.status(404).json({ error: 'Organization not found.'});
+            return;
         }
 
         const { org_id, org_name, org_created } = rows[0];
 
-        const deals = setupDealsData(rows);
+        const deals = setupDealsData(rows); // helpers.tsx
 
         const org = {
             org_id,

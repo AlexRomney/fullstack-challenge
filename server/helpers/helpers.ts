@@ -38,8 +38,8 @@ export function getDealRelationshipsQuery(
         deals.end_date,
         accounts.name AS account_name
         FROM organizations AS org
-        JOIN deals ON deals.organization_id = org.id
-        JOIN accounts ON deals.account_id = accounts.id
+        LEFT JOIN deals ON deals.organization_id = org.id
+        LEFT JOIN accounts ON deals.account_id = accounts.id
         ${whereClause}
     `;
 
@@ -47,13 +47,14 @@ export function getDealRelationshipsQuery(
 }
 
 export function setupDealsData(rows: DealRelationshipQuery[]) {
-
-    return rows.map((row) => ({
-        id: row.deal_id,
-        value: row.value,
-        status: row.status,
-        account_name: row.account_name,
-        start_date: row.start_date,
-        end_date: row.end_date,
-    }));
+    return rows
+        .filter((row) => row.deal_id !== null)
+        .map((row) => ({
+            id: row.deal_id!,
+            value: row.value!,
+            status: row.status!,
+            account_name: row.account_name!,
+            start_date: row.start_date!,
+            end_date: row.end_date!,
+        }));
 }
