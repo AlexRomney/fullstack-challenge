@@ -69,6 +69,16 @@ export default function OrganizationDetails() {
         return <p>Loading...</p>;
     }
 
+    const filteredDeals = org.deals.filter((deal) => {
+        const statusMatches = statusFilter === "all" || deal.status === statusFilter;
+        const yearMatches =
+            yearFilter === "all" ||
+            new Date(deal.start_date).getFullYear().toString() === yearFilter ||
+            new Date(deal.end_date).getFullYear().toString() === yearFilter;
+
+        return statusMatches && yearMatches;
+    });
+
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center sm:justify-between">
@@ -89,7 +99,7 @@ export default function OrganizationDetails() {
                 </div>
             </div>
 
-            {org.deals.length === 0 && (
+            {filteredDeals.length === 0 && (
                 <div className="mt-6 rounded-md bg-yellow-50 p-4 text-sm text-yellow-800 ring-1 ring-yellow-600/20">
                     This organization doesn't have any deals yet.
                 </div>
@@ -172,7 +182,7 @@ export default function OrganizationDetails() {
                     role="list"
                     className="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8 mt-6"
                 >
-                    {org.deals.map((deal) => (
+                    {filteredDeals.map((deal) => (
                         <DealCard
                             key={deal.id}
                             account_name={deal.account_name}
