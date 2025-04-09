@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Table from "../components/Table";
 
 interface Organization {
     id: number;
@@ -34,62 +35,38 @@ export default function Organization() {
                     </p>
                 </div>
             </div>
-            <div className="mt-8 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table className="min-w-full divide-y divide-gray-300">
-                            <thead>
-                                <tr>
-                                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                                        ID
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Name
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Joined Date
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Deal Count
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-200">
-                                { organizations.map((org) => (
-                                    <tr key={org.id}
-                                        onClick={() => navigate(`/organization/${org.id}`)}
-                                        className="cursor-pointer hover:bg-gray-50 transition"
-                                    >
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-500 sm:pl-0">
-                                            { org.id }
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            { org.name }
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            { new Date(org.created_at).toLocaleDateString() }
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            { org.deal_count }
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-right">
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    navigate(`/organizations/${org.id}`);
-                                                }}
-                                                className="inline-flex items-center rounded-md bg-gray-600 px-3 py-1 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none"
-                                            >
-                                                View
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <Table headers={["ID", "Name", "Joined Date", "Deal Count", ""]}>
+                {organizations.map((org) => (
+                    <tr key={org.id}
+                        onClick={() => navigate(`/organizations/${org.id}`)}
+                        className="cursor-pointer hover:bg-gray-50 transition"
+                    >
+                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-500 sm:pl-0">
+                            {org.id}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {org.name}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {new Date(org.created_at).toLocaleDateString()}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {org.deal_count}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-right">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate(`/organizations/${org.id}`);
+                                }}
+                                className="inline-flex items-center rounded-md bg-gray-600 px-3 py-1 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none"
+                            >
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </Table>
         </div>
     )
 }

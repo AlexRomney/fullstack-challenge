@@ -27,6 +27,8 @@ CHALLENGE 2
 
 - Added react-router for routing structure, axios for data handling and tailwind css for easy/fast styling.
 
+- Decided to add pages with table data to view all organizations, accounts and deals similar to what you'd see in an admin panel.
+
 ************************************
 CHALLENGE 3
 ************************************

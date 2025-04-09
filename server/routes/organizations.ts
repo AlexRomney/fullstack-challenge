@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { Database } from "better-sqlite3";
-import { Organization } from "../types";
 import { getDealRelationshipsQuery, setupDealsData } from "../helpers/helpers";
 
 export default function organizationRoutes(db: Database) {

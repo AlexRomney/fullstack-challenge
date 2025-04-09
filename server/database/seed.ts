@@ -67,5 +67,9 @@ export default function seedDatabase(db: Database): void {
         );
     });
 
+    insertDeal.run(
+        2, 2, now, endOfYear, 6500000, "active"
+    );
+
     console.log("✅ Seed data inserted");
 }
