@@ -34,3 +34,9 @@ CHALLENGE 2
 ************************************
 CHALLENGE 3
 ************************************
+
+- Added a simple filter that shows all the status options and years that are pertaining to the list of deals for the organization. The year filter looks at both start_date and end_date.
+
+************************************
+CONCLUSION
+************************************

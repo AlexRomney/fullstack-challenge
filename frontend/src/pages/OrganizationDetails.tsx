@@ -168,11 +168,16 @@ export default function OrganizationDetails() {
                                 className="mt-1 block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             >
                                 <option value="all">All</option>
-                                {Array.from(new Set(org.deals.map((deal) =>
-                                    new Date(deal.start_date).getFullYear()
-                                ))).map((year) => (
-                                    <option key={year} value={year}>{year}</option>
-                                ))}
+                                {Array.from(new Set(
+                                    filteredDeals.flatMap(deal => [
+                                        new Date(deal.start_date).getFullYear(),
+                                        new Date(deal.end_date).getFullYear()
+                                    ])
+                                ))
+                                    .sort((a, b) => b - a)
+                                    .map((year) => (
+                                        <option key={year} value={year}>{year}</option>
+                                    ))}
                             </select>
                         </div>
                     </div>

@@ -52,24 +52,36 @@ export default function seedDatabase(db: Database): void {
         `
     );
 
-    const now = dayjs().format("YYYY-MM-DD HH:mm:ss");
-    const endOfYear = dayjs().endOf("year").format("YYYY-MM-DD HH:mm:ss");
-
     accounts.forEach((account, index) => {
+
         const org = orgs[index % orgs.length];
+
+        const startDate = getRandomDateWithinFiveYears();
+        const endDate = dayjs(startDate).add(6, "month").format("YYYY-MM-DD HH:mm:ss");
+
         insertDeal.run(
             org.id,
             account.id,
-            now,
-            endOfYear,
+            startDate,
+            endDate,
             100000 + (index * 50000),
             "active"
         );
     });
+
+    const now = dayjs().format("YYYY-MM-DD HH:mm:ss");
+    const endOfYear = dayjs().endOf("year").format("YYYY-MM-DD HH:mm:ss");
 
     insertDeal.run(
         2, 3, now, endOfYear, 6500000, "active"
     );
 
     console.log("✅ Seed data inserted");
+}
+
+function getRandomDateWithinFiveYears(): string {
+    const now = dayjs();
+    const fiveYearsInDays = 5 * 365;
+    const randomOffset = Math.floor(Math.random() * fiveYearsInDays * 2) - fiveYearsInDays; // between -5y and +5y
+    return now.add(randomOffset, 'day').format("YYYY-MM-DD HH:mm:ss");
 }
