@@ -6,6 +6,8 @@ OVERVIEW
 
 - I separated each challenge into its own branch so you could see the work per task if you wanted. If not then you can merge each branch together and view it all.
 
+- The default status for a deal is 'active' so in order to view 'paused' and 'cancelled' I manually changed them in Table Plus.
+
 ************************************
 CHALLENGE 1
 ************************************
